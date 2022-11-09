@@ -1,0 +1,34 @@
+- provide(:title, t('.title'))
+
+.container-fluid
+  .row
+    = render "layouts/control_sidebar"
+    %main.col-md-11.ml-sm-auto.col-lg-11.p-3{:role => "main"}
+      - content_for :card_header do
+        %h5
+          = fa_icon "newspaper-o", text: t(controller_name + "." + action_name + '.title')
+          = link_to "/qes_banks/#{idencode(@qes_bank.id)}/#{controller_name}", :class => "button button-small  pull-right button-primary" do
+            = fa_icon " chevron-left", text: Setting.systems.btn_back, right: false 
+      - content_for :card_body do
+        .container-fluid
+          .row
+            .col-sm-12
+              %h2.text-center
+                = image_tag "gykg.jpg"
+            .col-md-8.offset-2.p-5.border
+              .card.border-0.mb-3.rounded-0
+                .card-body
+                  %p
+                    = @mcq.title
+                  %p
+                    - @mcq.mcq_options.each do |option|
+                      %span.mr-2{:class => option.answer ? 'text-danger' : ''}
+                        = option.title
+              
+                -#
+                  - @mcq.enclosures.each do |e|
+                  .col-md-6
+                    = image_tag e.file_url(:small_width), :class => "w-100"
+              
+              
+      = render "layouts/bootstrap/card"

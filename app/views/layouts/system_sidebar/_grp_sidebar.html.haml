@@ -1,0 +1,32 @@
+.card.border-0.rounded-0
+  .card-body.p-0
+    %ul#sidebar-lists.list-group.list-group-flush
+      .card.border-0.rounded-0
+        .card-header.text-left.pl-2.pr-0.py-3.border.border-left-0.border-top-0.border-bottom-0.border-success
+          业务管理
+        .card-body.py-0
+          = link_to qes_banks_path, :class => "list-group-item list-group-item-action border-0 text-left sidebar-text-font px-0" do
+            = fa_icon "archive", text: "题库管理"
+          = link_to laws_path, :class => "list-group-item list-group-item-action border-0 text-left sidebar-text-font px-0" do
+            = fa_icon "balance-scale", text: "法律制度"
+          = link_to essays_path, :class => "list-group-item list-group-item-action border-0 text-left sidebar-text-font px-0" do
+            = fa_icon "newspaper-o", text: "在线学习"
+          = link_to notices_path, :class => "list-group-item list-group-item-action border-0 text-left sidebar-text-font px-0" do
+            = fa_icon "volume-up", text: Setting.notices.label 
+          = link_to advises_path, :class => "list-group-item list-group-item-action border-0 text-left sidebar-text-font px-0" do
+            = fa_icon "diamond", text: Setting.advises.label 
+          -#
+            = link_to papers_path, :class => "list-group-item list-group-item-action border-0 text-left sidebar-text-font px-0" do
+            = fa_icon "clone", text: "考试试卷"
+        .card-header.text-left.pl-2.pr-0.py-3.border.border-left-0.border-top-0.border-bottom-0.border-success
+          类目管理
+        .card-body.py-0
+          = link_to learn_ctgs_path, :class => "list-group-item list-group-item-action border-0 text-left sidebar-text-font px-0" do
+            = fa_icon "sitemap", text: Setting.learn_ctgs.label
+          = link_to law_ctgs_path, :class => "list-group-item list-group-item-action border-0 text-left sidebar-text-font px-0" do
+            = fa_icon "sliders", text: Setting.law_ctgs.label 
+        .card-header.text-left.pl-2.pr-0.py-3.border.border-left-0.border-top-0.border-bottom-0.border-success{:id => "headingware"}
+          学生管理
+        .card-body.py-0
+          = link_to all_students_path, :class => "list-group-item list-group-item-action border-0 text-left sidebar-text-font px-0" do
+            = fa_icon "vcard-o", text: Setting.students.label 

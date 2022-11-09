@@ -1,0 +1,122 @@
+.container-fluid
+  .row.justify-content-sm-center
+    .col-sm-12
+      = form_for @paper, :url => "/papers/#{@paper.id ? idencode(@paper.id) : ''}", :builder => WebsiteFormBuilder, :html => {:'data-parsley-validate' => true} do |f|
+        - if @paper.errors.any?
+          #error_explanation.alert.alert-danger.alert-dismissible.fade.show
+            %button.close{"aria-label" => "Close", "data-dismiss" => "alert", :type => "button"}
+              %span{"aria-hidden" => "true"} x 
+            %h2= "#{pluralize(@paper.errors.count, "错误")}:"
+            %ul
+              - @paper.errors.full_messages.each do |msg|
+                %li= msg
+        .row
+          .col-sm-12
+            %h2.text-center
+              = image_tag "gykg.jpg"
+              = Setting.papers.label + '基础信息'
+          .col-md-8.offset-md-2.p-5.border
+            #flash_explanation
+            .card.border-0.mb-3.rounded-0
+              .card-body
+                %table.w-100.table-bordered.day-pdt-table
+                  %tbody
+                    
+                    %tr
+                      %td.p-2.text-center
+                        = f.label Setting.papers.name, :class => "text-center"
+                      %td.p-2.text-center{:colspan => 3}
+                        = f.text_field :name, :class => "form-control" , :required => true
+                      
+                    
+                    
+                    %tr
+                      %td.p-2.text-center
+                        = f.label Setting.papers.start_time, :class => "text-center"
+                      %td.p-2.text-center
+                        = f.datetime_select :start_time, :start_year => 2021, :order => [:year, :month, :day ], use_month_numbers: true, :class => "form-control"
+                      
+                    
+                    
+                      %td.p-2.text-center
+                        = f.label Setting.papers.end_time, :class => "text-center"
+                      %td.p-2.text-center
+                        = f.datetime_select :end_time, :start_year => 2021, :order => [:year, :month, :day ], use_month_numbers: true, :class => "form-control"
+                      
+                    
+                    %tr
+                      %td.p-2.text-center
+                        = f.label Setting.papers.single, :class => "text-center"
+                      %td.p-2.text-center
+                        = f.number_field :single, :class => "form-control", :step => "any"  , :required => true
+                      
+                    
+                    
+                      %td.p-2.text-center
+                        = f.label Setting.papers.single_score, :class => "text-center"
+                      %td.p-2.text-center
+                        = f.number_field :single_score, :class => "form-control", :step => "any"  , :required => true
+                      
+                    
+                    
+                    %tr
+                      %td.p-2.text-center
+                        = f.label Setting.papers.mcq, :class => "text-center"
+                      %td.p-2.text-center
+                        = f.number_field :mcq, :class => "form-control", :step => "any"  , :required => true
+                      
+                    
+                      %td.p-2.text-center
+                        = f.label Setting.papers.mcq_score, :class => "text-center"
+                      %td.p-2.text-center
+                        = f.number_field :mcq_score, :class => "form-control", :step => "any"  , :required => true
+                      
+                    
+                    
+                    %tr
+                      %td.p-2.text-center
+                        = f.label Setting.papers.tof, :class => "text-center"
+                      %td.p-2.text-center
+                        = f.number_field :tof, :class => "form-control", :step => "any"  , :required => true
+                      
+                    
+                    
+                      %td.p-2.text-center
+                        = f.label Setting.papers.tof_score, :class => "text-center"
+                      %td.p-2.text-center
+                        = f.number_field :tof_score, :class => "form-control", :step => "any"  , :required => true
+                      
+                    
+                    %tr
+                      %td.p-2.text-center
+                        = f.label Setting.papers.qaa, :class => "text-center"
+                      %td.p-2.text-center
+                        = f.number_field :qaa, :class => "form-control", :step => "any"  , :required => true
+                      
+                    
+                    
+                      %td.p-2.text-center
+                        = f.label Setting.papers.qaa_score, :class => "text-center"
+                      %td.p-2.text-center
+                        = f.number_field :qaa_score, :class => "form-control", :step => "any"  , :required => true
+                      
+                    
+                    
+                    %tr
+                      %td.p-2.text-center
+                        = f.label Setting.papers.desc, :class => "text-center"
+                      %td.p-2.text-center{:colspan => 3}
+                        = f.text_area :desc, :class => "form-control", :rows => "10" 
+                      
+                    
+          
+          
+          
+          
+          
+            .form-group.row
+              .col-3.offset-3
+                = f.submit '保存', :class => "button  button-small button-action"
+            -#
+              .col-3.offset-1
+                = link_to '返回', papers_path, :class => "button button-small  button-caution"

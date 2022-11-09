@@ -1,0 +1,81 @@
+.container-fluid
+  .row.justify-content-sm-center
+    .col-sm-12
+      = form_for @law, :url => "/laws/#{@law.id ? idencode(@law.id) : ''}", :builder => WebsiteFormBuilder, :html => {:'data-parsley-validate' => true} do |f|
+        - if @law.errors.any?
+          #error_explanation.alert.alert-danger.alert-dismissible.fade.show
+            %button.close{"aria-label" => "Close", "data-dismiss" => "alert", :type => "button"}
+              %span{"aria-hidden" => "true"} x 
+            %h2= "#{pluralize(@law.errors.count, "错误")}:"
+            %ul
+              - @law.errors.full_messages.each do |msg|
+                %li= msg
+        .row
+          .col-sm-12
+            %h2.text-center
+              = image_tag "gykg.jpg"
+              = Setting.laws.label
+          .col-md-8.offset-md-2.p-5.border
+            #flash_explanation
+            .card.border-0.mb-3.rounded-0
+              .card-body
+                %table.w-100.table-bordered.day-pdt-table
+                  %tbody
+                    %tr
+                      %td.p-2.text-center
+                        = f.label Setting.laws.title, :class => "text-center"
+                      %td.p-2.text-center
+                        = f.text_field :title, :class => "form-control" , :required => true
+                      
+                      %td.p-2.text-center
+                        = f.label Setting.laws.pdt_date, :class => "text-center"
+                      %td.p-2.text-center
+                        = f.date_field :pdt_date, :class => "form-control" 
+                      
+                    %tr
+                      %td.p-2.text-center
+                        = f.label Setting.law_ctgs.label, :class => "text-center"
+                      %td.p-2.text-center
+                        = select_tag 'law_ctg', options_for_law_ctg(@law_ctgs, @law), :include_blank=>false, :class=>"form-control"
+                    
+                      %td.p-2.text-center
+                        = f.label '文章格式', :class => "text-center"
+                      %td.p-2.text-center
+                        = f.select :ctg, options_for_law_type(@law), {:include_blank=>false}, {:class=>"form-control"}
+                    
+                    -#
+                      %tr
+                      %td.p-2{:colspan => 6}
+                        = f.kindeditor :content
+                      
+                    
+                    
+                      
+                    -#
+                      %tr
+                      %td.p-2.text-center
+                        = f.label Setting.laws.dept, :class => "text-center"
+                      %td.p-2.text-center
+                        = f.text_field :dept, :class => "form-control" , :required => true
+                      
+                    
+                    
+          
+          
+            .form-group.row
+              = f.label "文件", :class => "col-2 text-right col-form-label col-form-label text-right text-primary"
+              .col-9
+                %label.newbutton.button.button-primary
+                  %p.append-url
+                    = f.one_attachment("attch")
+                  = f.file_field :attch, :class => "select-file", :onchange => "readFileName(this);", :accept => ".pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx"
+          
+          
+          
+          
+            .form-group.row
+              .col-3.offset-3
+                = f.submit '保存', :class => "button  button-small button-action"
+            -#
+              .col-3.offset-1
+                = link_to '返回', laws_path, :class => "button button-small  button-caution"

@@ -1,0 +1,74 @@
+- provide(:title, t('.title'))
+
+.container-fluid
+  .row
+    = render "layouts/control_sidebar"
+    %main.col-md-11.ml-sm-auto.col-lg-11.p-3{:role => "main"}
+      - content_for :card_header do
+        %h5
+          = fa_icon "newspaper-o", text: t(controller_name + "." + action_name + '.title')
+          = link_to "/#{controller_name}", :class => "button button-small  pull-right button-primary" do
+            = fa_icon " chevron-left", text: Setting.systems.btn_back, right: false 
+      - content_for :card_body do
+        .container-fluid
+          .row
+            .col-sm-12
+              %h2.text-center
+                = image_tag "gykg.jpg"
+            .col-md-8.offset-2.p-5.border
+              .card.border-0.mb-3.rounded-0
+                .card-header.bg-transparent.border-dark
+                  %h5
+                    = Setting.qes_banks.label
+                .card-body
+                  %table.table-bordered.day-pdt-table.w-100.mb-3
+                    %tbody
+                    
+                      %tr
+                        %td.p-2.text-center
+                          = Setting.qes_banks.name
+                        %td.p-2.text-center
+                          = @qes_bank.name
+                    
+                      
+                        %td.p-2.text-center
+                          = Setting.qes_banks.editor
+                        %td.p-2.text-center
+                          = @qes_bank.editor
+                    
+                      
+                        %td.p-2.text-center
+                          = Setting.qes_banks.single_count
+                        %td.p-2.text-center
+                          = @qes_bank.single_count
+                    
+                      %tr
+                        %td.p-2.text-center
+                          = Setting.qes_banks.mcq_count
+                        %td.p-2.text-center
+                          = @qes_bank.mcq_count
+                    
+                      
+                        %td.p-2.text-center
+                          = Setting.qes_banks.tof_count
+                        %td.p-2.text-center
+                          = @qes_bank.tof_count
+                    
+                      
+                        %td.p-2.text-center
+                          = Setting.qes_banks.qaa_count
+                        %td.p-2.text-center
+                          = @qes_bank.qaa_count
+                    
+              .row
+              
+                .col-md-6
+                  = image_tag @qes_bank.photo_url, :class => "w-100"
+              
+              .row
+              
+              .row
+              
+              
+              
+      = render "layouts/bootstrap/card"

@@ -1,0 +1,58 @@
+- provide(:title, t('.title'))
+
+
+.container-fluid
+  .row
+    = render "layouts/control_sidebar"
+    %main.col-md-11.ml-sm-auto.col-lg-11.p-3{:role => "main"}
+      - content_for :card_header do
+        %h5
+          = fa_icon "list", text: t(controller_name + "." + action_name + '.title')
+
+      - content_for :card_body do
+        .container-fluid
+          .row
+            .col-md-12
+              %table#item-table.text-center.table-sm{:'data-toggle' => "table", :'data-id-table'=>"advancedTable", :"data-pagination"=>"true", :'data-page-size' => "25", :"data-search" => "true", :'data-advanced-search'=>"true", :'data-virtual-scroll' => false }
+                %thead
+                  %tr
+                    %th{:scope => "col", :'data-field' => "id"} #
+                  
+                    %th{:scope => "col", :'data-field' => "fct"}
+                      公司
+                    %th{:scope => "col", :'data-field' => "name"}
+                      = Setting.students.name
+
+                    %th{:scope => "col", :'data-field' => "nickname"}
+                      = Setting.students.nickname
+                  
+                    %th{:scope => "col", :'data-field' => "idno"}
+                      = Setting.students.phone
+                  
+                    -#
+                      %th{:scope => "col", :'data-field' => "button"}
+                %tbody
+                  - @students.each_with_index do |student, index|
+                    %tr
+                      %td{:scope => "row"}
+                        = index+1
+                      %td
+                        = student[:fct]
+                    
+                      %td
+                        = student[:name]
+                      %td
+                        = student[:nickname]
+                      %td
+                        = student[:idno]
+                      -#
+                        %td
+                        .container-fluid
+                          .row.justify-content-center
+                            = link_to "编辑", edit_student_path(idencode(student.id)), :class => "button button-royal button-small mr-1" 
+                            = link_to "查看",  student_path(idencode(student.id)), :class => "button button-primary button-small mr-1" 
+                            = link_to "删除",  student_path(idencode(student.id)), :method => :delete, :data => {:confirm => "确定删除吗?"}, :class => "button button-caution button-small" 
+            -#
+              .col-md-12.site-theme-paginate-wrapper.d-flex.justify-content-center.mt-3
+                = paginate @students, window: 2, left: 1, right: 1 
+      = render "layouts/bootstrap/card"

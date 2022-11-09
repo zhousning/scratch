@@ -1,0 +1,71 @@
+---
+- 
+  role_name: 厂区用户
+  level: 1
+- 
+  role_name: 集团用户
+  level: 1
+- 
+  role_name: 题库管理 
+  level: 1
+  permissions: 
+    -
+      controller: qes_banks_controller
+      actions: [index, new, create, edit, update, show, destroy, query_all, query_lib_all]
+    -
+      controller: singles_controller
+      actions: [index, destroy, xls_download, parse_excel]
+    -
+      controller: mcqs_controller
+      actions: [index, destroy, xls_download, parse_excel]
+    -
+      controller: tofs_controller
+      actions: [index, destroy, xls_download, parse_excel]
+    -
+      controller: qaas_controller
+      actions: [index, destroy, xls_download, parse_excel]
+- 
+  role_name: 法律制度 
+  level: 1
+  permissions: 
+    -
+      controller: laws_controller
+      actions: [index, new, create, edit, update, show, destroy, download_append, query_all]
+- 
+  role_name: 在线学习 
+  level: 1
+  permissions: 
+    -
+      controller: essays_controller
+      actions: [index, new, create, edit, update, show, destroy, download_append]
+- 
+  role_name: 通知公告 
+  level: 1
+  permissions: 
+    -
+      controller: notices_controller
+      actions: [index, new, create, edit, update, show, destroy, download_append, download_attachment, query_all]
+- 
+  role_name: 意见反馈 
+  level: 1
+  permissions: 
+    -
+      controller: advises_controller
+      actions: [index, show, destroy, query_all]
+- 
+  role_name: 分类管理 
+  level: 1
+  permissions: 
+    -
+      controller: learn_ctgs_controller
+      actions: [index, new, create, edit, update, show, destroy, query_all]
+    -
+      controller: law_ctgs_controller
+      actions: [index, new, create, edit, update, show, destroy, query_all]
+- 
+  role_name: 学生管理 
+  level: 1
+  permissions: 
+    -
+      controller: students_controller
+      actions: [all]

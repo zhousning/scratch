@@ -1,0 +1,44 @@
+---
+#controller的名字均为程序中controller名称的单数，如AnalysesController为Analysis，必须有对应的model,可以建空model
+#-
+#  controller: water_items_controller
+#  actions: [index, new, create, edit, update, show, destroy, update_count, xls_download, parse_excel, query_all]
+-
+  controller: students_controller
+  actions: [all]
+-
+  controller: papers_controller
+  actions: [index, new, create, edit, update, show, destroy, download_append, download_paper, xls_download, query_all]
+-
+  controller: qes_banks_controller
+  actions: [index, new, create, edit, update, show, destroy, query_all, query_lib_all]
+-
+  controller: singles_controller
+  actions: [index, destroy, xls_download, parse_excel]
+-
+  controller: mcqs_controller
+  actions: [index, destroy, xls_download, parse_excel]
+-
+  controller: tofs_controller
+  actions: [index, destroy, xls_download, parse_excel]
+-
+  controller: qaas_controller
+  actions: [index, destroy, xls_download, parse_excel]
+-
+  controller: essays_controller
+  actions: [index, new, create, edit, update, show, destroy, download_append]
+-
+  controller: laws_controller
+  actions: [index, new, create, edit, update, show, destroy, download_append, query_all]
+-
+  controller: advises_controller
+  actions: [index, show, destroy, query_all]
+-
+  controller: notices_controller
+  actions: [index, new, create, edit, update, show, destroy, download_append, download_attachment, query_all]
+-
+  controller: learn_ctgs_controller
+  actions: [index, new, create, edit, update, show, destroy, query_all]
+-
+  controller: law_ctgs_controller
+  actions: [index, new, create, edit, update, show, destroy, query_all]
