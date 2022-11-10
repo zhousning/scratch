@@ -1,7 +1,15 @@
+# encoding: UTF-8
+
+require 'restclient'
+require 'open-uri'
+require 'open_uri_redirections'
+require 'nokogiri'
+require 'json'
 require 'yaml'
 require 'logger'
 require 'find'
-require 'json'
+require 'fileutils'
+require 'base64'
 
 namespace 'db' do
   desc "import_sebcbanks"
@@ -12,7 +20,6 @@ namespace 'db' do
     @tags = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
 
     Find.find(sebcbanks_dir).each do |file|
-      puts file
       unless File::directory?(file)
         sebcnames = file.gsub(sebcbanks_dir, '').gsub('.json', '')
         name_arr = sebcnames.split('/')
@@ -27,15 +34,15 @@ namespace 'db' do
         sebcLists = sebcbanks['value']['subjectLevelList'] || sebcbanks['value']['subjectList']
         sebcLists.each do |item|
           type = item['type']
-          title = item['title']
+          title = convert_base64(item['title'])
           answer = item['answer'].blank? ? '' : item['answer'].strip
-          analyzeContent = item['analyzeContent']
+          analyzeContent = convert_base64(item['analyzeContent'])
 
           if type == 1 #单选题
             @single = Single.create!(:qes_bank => @qes_bank, :title => title)
             @tags.each do |tag|
               unless item['option' + tag].blank?
-                option_title = item['option' + tag] 
+                option_title = convert_base64(item['option' + tag]) 
                 flag = false
                 flag = true if answer == tag 
                 SingleOption.create(:title => option_title, :single => @single, :answer => flag)
@@ -53,7 +60,15 @@ namespace 'db' do
   end
 end
 
-
+def convert_base64(content)
+  content.gsub!(/src="http[^"]*"/) do |src|
+    image_src = src.gsub('src=', '').gsub(/"/, '')
+    file = open(image_src).read
+    img = Base64.encode64(file)
+    "src='data:image;base64," + img + "'"
+  end
+  content
+end
 
 #sebcList['topic_list'].each do |item|
 #  answer  = item['answer_option']

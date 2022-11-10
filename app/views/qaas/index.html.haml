@@ -39,7 +39,7 @@
                             = link_to "编辑", edit_qes_bank_qaa_path(idencode(@qes_bank.id), idencode(qaa.id)), :class => "mr-1" 
                           = link_to "删除", qes_bank_qaa_path(idencode(@qes_bank.id), idencode(qaa.id)), :method => :delete, :data => {:confirm => "确定删除吗?"}
                         %p
-                          = qaa.answer
+                          = qaa.answer.html_safe
               -#
                 = link_to , qes_bank_qaa_path(idencode(@qes_bank.id), idencode(qaa.id)), :class => 'text-dark' 
                 .col-md-12.site-theme-paginate-wrapper.d-flex.justify-content-center.mt-3
