@@ -4,6 +4,7 @@ class CreateSingles < ActiveRecord::Migration
     
       t.text :title
     
+      t.text :analyze_content
 
       t.references :qes_bank
     

@@ -35,10 +35,14 @@
                         %p
                           = index+1
                           = qaa.title.html_safe
+                        %p
+                          解析:
+                          = qaa.analyze_content.html_safe
                           -#
                             = link_to "编辑", edit_qes_bank_qaa_path(idencode(@qes_bank.id), idencode(qaa.id)), :class => "mr-1" 
                           = link_to "删除", qes_bank_qaa_path(idencode(@qes_bank.id), idencode(qaa.id)), :method => :delete, :data => {:confirm => "确定删除吗?"}
                         %p
+                          答案:
                           = qaa.answer.html_safe
               -#
                 = link_to , qes_bank_qaa_path(idencode(@qes_bank.id), idencode(qaa.id)), :class => 'text-dark' 

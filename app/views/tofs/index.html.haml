@@ -35,10 +35,14 @@
                         %p
                           = index+1
                           = tof.title.html_safe
+                        %p
+                          解析:
+                          = tof.analyze_content.html_safe
                           -#
                             = link_to "编辑", edit_qes_bank_tof_path(idencode(@qes_bank.id), idencode(tof.id)), :class => "mr-1" 
                           = link_to "删除", qes_bank_tof_path(idencode(@qes_bank.id), idencode(tof.id)), :method => :delete, :data => {:confirm => "确定删除吗?"}
                         %p
+                          答案:
                           - if tof.answer
                             正确
                           - else

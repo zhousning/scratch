@@ -5,6 +5,8 @@ class CreateTofs < ActiveRecord::Migration
       t.text :title
     
       t.boolean :answer,  null: false, default: false 
+
+      t.text :analyze_content
     
 
       t.references :qes_bank

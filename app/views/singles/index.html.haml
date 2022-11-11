@@ -35,6 +35,9 @@
                         %p
                           = index+1
                           = single.title.html_safe
+                        %p
+                          解析:
+                          = single.analyze_content.html_safe
                           -#
                             = link_to "编辑", edit_qes_bank_single_path(idencode(@qes_bank.id), idencode(single.id)), :class => "mr-1" 
                           = link_to "删除", qes_bank_single_path(idencode(@qes_bank.id), idencode(single.id)), :method => :delete, :data => {:confirm => "确定删除吗?"}

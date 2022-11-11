@@ -3,6 +3,8 @@ class CreateMcqs < ActiveRecord::Migration
     create_table :mcqs do |t|
     
       t.text :title
+
+      t.text :analyze_content
     
       t.references :qes_bank
 

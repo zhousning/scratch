@@ -5,6 +5,8 @@ class CreateQaas < ActiveRecord::Migration
       t.text :title
     
       t.text :answer
+
+      t.text :analyze_content
     
 
       t.references :qes_bank
