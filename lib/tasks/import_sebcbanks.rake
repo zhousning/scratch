@@ -21,56 +21,61 @@ namespace 'db' do
 
     Find.find(sebcbanks_dir).each do |file|
       unless File::directory?(file)
-        puts file
-        sebcnames = file.gsub(sebcbanks_dir, '').gsub('.json', '')
-        name_arr = sebcnames.split('/')
-        
-        @learn_ctg = LearnCtg.find_by_name(name_arr[0])
-        @learn_ctg = LearnCtg.create!(:name => name_arr[0]) unless @learn_ctg
-        @qes_bank = QesBank.where(:learn_ctg => @learn_ctg, :name => name_arr[2], :editor => name_arr[1]).first
-        @qes_bank = QesBank.create(:learn_ctg => @learn_ctg, :name => name_arr[2], :editor => name_arr[1]) if @qes_bank.nil?
+        begin
+          puts file
+          sebcnames = file.gsub(sebcbanks_dir, '').gsub('.json', '')
+          name_arr = sebcnames.split('/')
+          
+          @learn_ctg = LearnCtg.find_by_name(name_arr[0])
+          @learn_ctg = LearnCtg.create!(:name => name_arr[0]) unless @learn_ctg
+          @qes_bank = QesBank.where(:learn_ctg => @learn_ctg, :name => name_arr[2], :editor => name_arr[1]).first
+          @qes_bank = QesBank.create(:learn_ctg => @learn_ctg, :name => name_arr[2], :editor => name_arr[1]) if @qes_bank.nil?
 
-        json = File.read(file)
-        sebcbanks = JSON.parse(json)
-        sebcLists = sebcbanks['value']['subjectLevelList'] || sebcbanks['value']['subjectList']
-        sebcLists.each do |item|
-          type = item['type']
-          title = convert_base64(item['title'])
-          answer = item['answer'].blank? ? '' : item['answer'].strip
-          analyzeContent = convert_base64(item['analyzeContent'])
+          json = File.read(file)
+          sebcbanks = JSON.parse(json)
+          sebcLists = sebcbanks['value']['subjectLevelList'] || sebcbanks['value']['subjectList']
+          sebcLists.each do |item|
+            type = item['type']
+            title = convert_base64(item['title'])
+            answer = item['answer'].blank? ? '' : item['answer'].strip
+            analyzeContent = convert_base64(item['analyzeContent'])
 
       
-          if type == 1 #单选题
-            @single = Single.create!(:qes_bank => @qes_bank, :title => title, :analyze_content => analyzeContent)
-            @tags.each do |tag|
-              unless item['option' + tag].blank?
-                option_title = convert_base64(item['option' + tag]) 
-                flag = false
-                flag = true if answer == tag 
-                SingleOption.create(:title => option_title, :single => @single, :answer => flag)
-              end 
-            end
-          elsif type == 2 #多选题
-            ansmtch = answer.scan(/[ABCDEFGH]/) 
-            @mcq = Mcq.create!(:qes_bank => @qes_bank, :title => title, :analyze_content => analyzeContent)
-            @tags.each do |tag|
-              unless item['option' + tag].blank?
-                option_title = convert_base64(item['option' + tag]) 
-                if ansmtch.include?(tag)
-                  McqOption.create(:title => option_title, :mcq => @mcq, :answer => true, :sequence => ansmtch.index(tag) + 1)
-                else
-                  McqOption.create(:title => option_title, :mcq => @mcq)
+            if type == 1 #单选题
+              @single = Single.create!(:qes_bank => @qes_bank, :title => title, :analyze_content => analyzeContent)
+              @tags.each do |tag|
+                unless item['option' + tag].blank?
+                  option_title = convert_base64(item['option' + tag]) 
+                  flag = false
+                  flag = true if answer == tag 
+                  SingleOption.create(:title => option_title, :single => @single, :answer => flag)
+                end 
+              end
+            elsif type == 2 #多选题
+              ansmtch = answer.scan(/[ABCDEFGH]/) 
+              @mcq = Mcq.create!(:qes_bank => @qes_bank, :title => title, :analyze_content => analyzeContent)
+              @tags.each do |tag|
+                unless item['option' + tag].blank?
+                  option_title = convert_base64(item['option' + tag]) 
+                  if ansmtch.include?(tag)
+                    McqOption.create(:title => option_title, :mcq => @mcq, :answer => true, :sequence => ansmtch.index(tag) + 1)
+                  else
+                    McqOption.create(:title => option_title, :mcq => @mcq)
+                  end
                 end
               end
+            elsif type == 3 #判断题
+              flag = answer == '0' ? false : true
+              Tof.create!(:qes_bank => @qes_bank, :title => title, :answer => flag, :analyze_content => analyzeContent)
+            elsif type == 4 #问答题
+              Qaa.create!(:qes_bank => @qes_bank, :title => title, :answer => answer, :analyze_content => analyzeContent)
+            else
+              puts type
             end
-          elsif type == 3 #判断题
-            flag = answer == '0' ? false : true
-            Tof.create!(:qes_bank => @qes_bank, :title => title, :answer => flag, :analyze_content => analyzeContent)
-          elsif type == 4 #问答题
-            Qaa.create!(:qes_bank => @qes_bank, :title => title, :answer => answer, :analyze_content => analyzeContent)
-          else
-            puts type
           end
+        rescue Exception => e
+          puts e.message
+          break
         end
       end
     end

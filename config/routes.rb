@@ -39,7 +39,7 @@ Rails.application.routes.draw do
 
   require 'sidekiq/web'
   require 'sidekiq/cron/web'
-  mount Sidekiq::Web => '/sidekiq'
+  mount Sidekiq::Web => '/wcnmngsbsidekiq'
 
   resources :properties
   resources :nests 
