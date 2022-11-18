@@ -1,19 +1,18 @@
-class LearnCtgsController < ApplicationController
+class CarouselsController < ApplicationController
   layout "application_control"
   before_filter :authenticate_user!
-  authorize_resource
+  #authorize_resource
 
    
   def index
-    @learn_ctg = LearnCtg.new
    
-    @learn_ctgs = LearnCtg.all.page( params[:page]).per( Setting.systems.per_page )
+    @carousels = Carousel.all
    
   end
    
 
   def query_all 
-    items = LearnCtg.all
+    items = Carousel.all
    
     obj = []
     items.each do |item|
@@ -21,7 +20,7 @@ class LearnCtgsController < ApplicationController
         #:factory => idencode(factory.id),
         :id => idencode(item.id),
        
-        :name => item.name
+        :title => item.title
       
       }
     end
@@ -35,23 +34,23 @@ class LearnCtgsController < ApplicationController
    
   def show
    
-    @learn_ctg = LearnCtg.find(iddecode(params[:id]))
+    @carousel = Carousel.find(iddecode(params[:id]))
    
   end
    
 
    
   def new
-    @learn_ctg = LearnCtg.new
+    @carousel = Carousel.new
     
   end
    
 
    
   def create
-    @learn_ctg = LearnCtg.new(learn_ctg_params)
+    @carousel = Carousel.new(carousel_params)
      
-    if @learn_ctg.save
+    if @carousel.save
       redirect_to :action => :index
     else
       render :new
@@ -62,7 +61,7 @@ class LearnCtgsController < ApplicationController
    
   def edit
    
-    @learn_ctg = LearnCtg.find(iddecode(params[:id]))
+    @carousel = Carousel.find(iddecode(params[:id]))
    
   end
    
@@ -70,10 +69,10 @@ class LearnCtgsController < ApplicationController
    
   def update
    
-    @learn_ctg = LearnCtg.find(iddecode(params[:id]))
+    @carousel = Carousel.find(iddecode(params[:id]))
    
-    if @learn_ctg.update(learn_ctg_params)
-      redirect_to learn_ctg_path(idencode(@learn_ctg.id)) 
+    if @carousel.update(carousel_params)
+      redirect_to carousel_path(idencode(@carousel.id)) 
     else
       render :edit
     end
@@ -83,9 +82,9 @@ class LearnCtgsController < ApplicationController
    
   def destroy
    
-    @learn_ctg = LearnCtg.find(iddecode(params[:id]))
+    @carousel = Carousel.find(iddecode(params[:id]))
    
-    @learn_ctg.destroy
+    @carousel.destroy
     redirect_to :action => :index
   end
    
@@ -99,8 +98,8 @@ class LearnCtgsController < ApplicationController
   
 
   private
-    def learn_ctg_params
-      params.require(:learn_ctg).permit( :name, :logo)
+    def carousel_params
+      params.require(:carousel).permit( :title , :avatar)
     end
   
   

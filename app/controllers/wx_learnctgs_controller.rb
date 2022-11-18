@@ -11,7 +11,9 @@ class WxLearnctgsController < ApplicationController
         #:factory => idencode(factory.id),
         :id => idencode(item.id),
        
-        :name => item.name
+        :name => item.name,
+
+        :logo => item.logo
       
       }
     end
@@ -35,7 +37,7 @@ class WxLearnctgsController < ApplicationController
       }
     end
     respond_to do |f|
-      f.json{ render :json => {:title => learn_ctg.name, :res => obj}.to_json}
+      f.json{ render :json => {:title => learn_ctg.logo, :res => obj}.to_json}
     end
   end
 

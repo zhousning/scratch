@@ -21,8 +21,8 @@ class WxUsersController < ApplicationController
     iv = params[:iv]
     url = "https://api.weixin.qq.com/sns/jscode2session"
     data = {
-      appid: "wxfa7abc0845745fb8", 
-      secret: "4c93bcb1a27aab64bd1c1e9ddfb2b660",
+      appid: "wxb8a77e86da1077f5", 
+      secret: "986769de9036e4e0dd49677f604a5a15",
       js_code: params[:code].to_s,
       grant_type: 'authorization_code'
     }

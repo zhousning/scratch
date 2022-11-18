@@ -30,6 +30,22 @@ class WxQesbanksController < ApplicationController
     end
   end
 
+  def query_type_all 
+    qes_bank = QesBank.find(iddecode(params[:qes_bank_id]))
+    single_count = qes_bank.singles.count
+    mcq_count = qes_bank.mcqs.count
+    tof_count = qes_bank.tofs.count
+    qaa_count = qes_bank.qaas.count
+    respond_to do |f|
+      f.json{ render :json => {
+        :single => single_count, 
+        :mcq => mcq_count, 
+        :tof => tof_count, 
+        :qaa => qaa_count 
+      }.to_json}
+    end
+  end
+
   def query_lib_all 
     learn_ctg = LearnCtg.find(iddecode(params[:learn_ctg_id]))
     items = learn_ctg.qes_banks.where(:editor => params[:qes_lib_name])
@@ -70,6 +86,7 @@ class WxQesbanksController < ApplicationController
         :type => '0',
         :title => number + item.title,
         :options => option_arrs,
+        :analyse => item.analyze_content,
         :answer => answer
       }
     end
@@ -102,6 +119,7 @@ class WxQesbanksController < ApplicationController
         :type => '1',
         :title => number + item.title,
         :options => option_arrs,
+        :analyse => item.analyze_content,
         :answer => answer
       }
     end
@@ -124,6 +142,7 @@ class WxQesbanksController < ApplicationController
       obj << {
         :type => '2',
         :title => number + item.title,
+        :analyse => item.analyze_content,
         :options => option_arrs,
         :answer => item.answer ? 'A' : 'B'
       }
@@ -145,6 +164,7 @@ class WxQesbanksController < ApplicationController
         :type => '3',
         :title => number + item.title,
         :options => [],
+        :analyse => item.analyze_content,
         :answer => item.answer
       }
     end

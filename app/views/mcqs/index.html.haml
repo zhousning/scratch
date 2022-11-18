@@ -41,10 +41,9 @@
                           -#
                             = link_to "编辑", edit_qes_bank_mcq_path(idencode(@qes_bank.id), idencode(mcq.id)), :class => "mr-1" 
                           = link_to "删除", qes_bank_mcq_path(idencode(@qes_bank.id), idencode(mcq.id)), :method => :delete, :data => {:confirm => "确定删除吗?"}
-                        %p
-                          - mcq.mcq_options.each do |option|
-                            %span.mr-2{:class => option.answer ? 'text-danger' : ''}
-                              = option.title.html_safe
+                        - mcq.mcq_options.each do |option|
+                          %div{:class => option.answer ? 'text-danger' : ''}
+                            = option.title.html_safe
               -#
                 = link_to , qes_bank_mcq_path(idencode(@qes_bank.id), idencode(mcq.id)), :class => 'text-dark' 
                 .col-md-12.site-theme-paginate-wrapper.d-flex.justify-content-center.mt-3

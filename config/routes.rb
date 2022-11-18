@@ -183,6 +183,7 @@ Rails.application.routes.draw do
   resources :wx_qesbanks, :only => []  do
     collection do
       get 'query_all'
+      get 'query_type_all'
       get 'single_query_all'
       get 'mcq_query_all'
       get 'tof_query_all'
@@ -197,6 +198,13 @@ Rails.application.routes.draw do
       get 'query_show'
     end
     get :download_append, :on => :member
+  end
+
+  resources :carousels
+  resources :wx_systems, :only => [] do
+    collection do
+      get 'dog'
+    end
   end
 
   resources :flower

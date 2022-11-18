@@ -1,14 +1,14 @@
 ---
-mysetting: &mysetting
-  notices: 
+mysetting:
+  notices: &1
     label: 通知公告
     title: 标题
     notice_date: 日期
     content: 内容
-  reports: 
+  reports: &2
     title: 标题
     content: 正文
-  models: 
+  models: &3
     label: ''
     name: 名称
     image: 图像
@@ -20,15 +20,15 @@ mysetting: &mysetting
     js: js
     scss: scss
     admin: 添加到后台
-  properties: 
+  properties: &4
     label: 嵌套显示的属性
     name: 属性名
     tag: 标签
-  relates: 
+  relates: &5
     label: ''
     type: 关联类型
     obj: 对象
-  templates: 
+  templates: &6
     label: 模板
     name: 英文名称
     cn_name: 中文名称
@@ -48,13 +48,13 @@ mysetting: &mysetting
     upload: 上传解析表格
     admin: 添加到后台
     current_user: current_user
-  natures: 
+  natures: &7
     label: ''
     name: 英文属性名
     type: 类型
     title: 中文属性名
     tag: 标签
-  spiders: 
+  spiders: &8
     label: 爬虫
     link: 请求地址
     cookie: cookie
@@ -65,7 +65,7 @@ mysetting: &mysetting
     referer: referer
     host: host
     redirection: redirection
-  selectors: 
+  selectors: &9
     label: 选择器
     name: 选择器名称
     category: 类型
@@ -80,13 +80,13 @@ mysetting: &mysetting
       img:
         info: 图片
         value: '2'
-defaults: &defaults
-  admins: 
+defaults:
+  admins: &10
     class_name: all
     email: myzn@world.com
     phone: '17305379588'
     password: dagening@521
-  users: 
+  users: &11
     class_name: User
     opening: 0
     pending: 1
@@ -105,7 +105,7 @@ defaults: &defaults
     status: 认证状态
     level: 等级
     inviter: 邀请者
-  roles: 
+  roles: &12
     label: 角色
     name: 名称
     class_name: Role
@@ -113,20 +113,20 @@ defaults: &defaults
     role_fct: 厂区用户
     role_grp: 集团用户
     role_qesbank: 题库管理
-    role_law: 法律制度 
-    role_learn: 在线学习 
-    role_notice: 通知公告 
-    role_advise: 意见反馈 
-    role_ctg: 分类管理 
+    role_law: 法律制度
+    role_learn: 在线学习
+    role_notice: 通知公告
+    role_advise: 意见反馈
+    role_ctg: 分类管理
     role_student: 学生管理
-  permissions: 
+  permissions: &13
     super_admin: 管理系统所有资源
     label: 权限管理
     name: 名称
     subject_class: controller单数名称
     action: action
     description: 描述
-  systems: 
+  systems: &14
     poundage: 0.1
     commision: 0.1
     authc_pay: 1
@@ -159,9 +159,9 @@ defaults: &defaults
     pending: 待审核
     rejected: 不通过
     passed: 通过
-    txt: 文本 
-    pdf: PDF 
-  states: 
+    txt: 文本
+    pdf: PDF
+  states: &15
     opening: opening
     selecting: selecting
     selected: selected
@@ -175,7 +175,7 @@ defaults: &defaults
     pending: pending
     passed: passed
     working: working
-  trade_orders: 
+  trade_orders: &16
     number: 订单编号
     price: 价格
     state: 状态
@@ -195,7 +195,7 @@ defaults: &defaults
     completed_title: 已完成
     canceled: canceled
     canceled_title: 已取消
-  extract_cashes: 
+  extract_cashes: &17
     coin: 提取金额
     status: 状态
     pending: pending
@@ -204,7 +204,7 @@ defaults: &defaults
     agree_title: 同意
     disagree: disagree
     disagree_title: 不同意
-  file_libs: 
+  file_libs: &18
     label: 文件库
     name: 文件名
     path: 路径
@@ -216,40 +216,40 @@ defaults: &defaults
     ppt: '4'
     mp4: '5'
     txt: '6'
-  archives: 
+  archives: &19
     label: 档案库
     name: 名称
     desc: 备注
-  portfolios: 
+  portfolios: &20
     label: 文件夹
     name: 文件夹名
-  examines: 
+  examines: &21
     label: 考核资料自选库
     name: 名称
-  exm_items: 
+  exm_items: &22
     label: 一级目录
     name: 一级目录名
     hierarchy: 目录树
-  agendas: 
+  agendas: &23
     label: 日程
     title: 标题
     content: 事务内容
     worktime: 时间
-  statistics: 
+  statistics: &24
     label: 统计
     title: 标题
     xtitle: x轴标题
     ytitle: y轴标题
     legend: 图例
     data: 数据
-  companies: 
+  companies: &25
     label: 公司
     area: 地区
     name: 名称
     info: 简介
     lnt: 经度
     lat: 维度
-  factories: 
+  factories: &26
     label: 工厂
     area: 地区
     name: 名称
@@ -258,11 +258,11 @@ defaults: &defaults
     lnt: 经度
     lat: 维度
     plan: 计划
-  departments: 
+  departments: &27
     label: 部门
     name: 名称
     info: 简介
-  charts: 
+  charts: &28
     line: '0'
     bar: '1'
     gauge: '2'
@@ -275,7 +275,7 @@ defaults: &defaults
     table_t: table
     radar_t: radar
     scatter_3d_t: scatter_3d
-  months: 
+  months: &29
     one: '1'
     one_t: 一月
     two: '2'
@@ -300,7 +300,7 @@ defaults: &defaults
     eleven_t: 十一月
     twelve: '12'
     twelve_t: 十二月
-  accounts: 
+  accounts: &30
     coin: 金额
     password: 安全密码
     number: 卡号
@@ -311,7 +311,7 @@ defaults: &defaults
     award_invite_recharge: 40
     enable: enable
     disable: disable
-  wares: 
+  wares: &31
     water_item: '0'
     sewage_item: '1'
     project_item: '2'
@@ -320,19 +320,19 @@ defaults: &defaults
     stuff: '5'
     device: '6'
     uphold: '7'
-  productions: 
+  productions: &32
     label: 生产设备
     name: 名称
-  waters: 
+  waters: &33
     label: 供水
     name: 名称
-  water_ones: 
+  water_ones: &34
     label: 供水一级分类
     name: 名称
-  water_twos: 
+  water_twos: &35
     label: 供水二级分类
     name: 名称
-  water_items: 
+  water_items: &36
     label: 供水设备
     name: 名称
     idno: 编码
@@ -341,16 +341,16 @@ defaults: &defaults
     fct: 厂家
     desc: 备注
     count: 数量
-  sewages: 
+  sewages: &37
     label: 污水
     name: 名称
-  sewage_ones: 
+  sewage_ones: &38
     label: 污水一级分类
     name: 名称
-  sewage_twos: 
+  sewage_twos: &39
     label: 污水二级分类
     name: 名称
-  sewage_items: 
+  sewage_items: &40
     label: 污水设备
     name: 名称
     idno: 编码
@@ -359,16 +359,16 @@ defaults: &defaults
     fct: 厂家
     desc: 备注
     count: 数量
-  projects: 
+  projects: &41
     label: 工程
     name: 名称
-  project_ones: 
+  project_ones: &42
     label: 工程一级分类
     name: 名称
-  project_twos: 
+  project_twos: &43
     label: 工程二级分类
     name: 名称
-  project_items: 
+  project_items: &44
     label: 工程知识
     name: 名称
     idno: 编码
@@ -377,7 +377,7 @@ defaults: &defaults
     fct: 厂家
     desc: 备注
     count: 数量
-  repair_parts: 
+  repair_parts: &45
     label: 维修配件
     name: 名称
     idno: 编码
@@ -386,7 +386,7 @@ defaults: &defaults
     fct: 厂家
     desc: 备注
     count: 数量
-  emergencies: 
+  emergencies: &46
     label: 应急知识
     name: 名称
     idno: 编码
@@ -395,7 +395,7 @@ defaults: &defaults
     fct: 厂家
     desc: 备注
     count: 数量
-  stuffs: 
+  stuffs: &47
     label: 化学菌剂
     name: 名称
     idno: 编码
@@ -404,7 +404,7 @@ defaults: &defaults
     fct: 厂家
     desc: 备注
     count: 重量kg
-  devices: 
+  devices: &48
     label: 设备档案
     idno: 设备编号
     name: 设备名称
@@ -423,14 +423,14 @@ defaults: &defaults
     state_normal: 正常
     state_repair: 检修
     state_stop: 停用
-  upholds: 
+  upholds: &49
     label: 维保记录
     uphold_date: 日期
     reason: 维保原因
     content: 维保内容
     cost: 费用
     state: 状态
-  papers:
+  papers: &50
     label: 试卷
     name: 试卷名
     start_time: 考试开始时间
@@ -446,29 +446,29 @@ defaults: &defaults
     desc: 备注
     right: 对
     error: 错
-  singles:
+  singles: &51
     label: 单选题
     title: 题目
-  single_options:
+  single_options: &52
     label: 单选选项
     title: 选项内容
     answer: 答案
-  mcqs:
+  mcqs: &53
     label: 多选题
     title: 标题
-  mcq_options:
+  mcq_options: &54
     label: 多选题选项
     title: 标题
     answer: 答案
-  tofs:
+  tofs: &55
     label: 判断题
     title: 标题
     answer: 答案
-  qaas:
+  qaas: &56
     label: 问答题
     title: 标题
     answer: 答案
-  qes_banks:
+  qes_banks: &57
     label: 题库
     name: 题库名
     editor: 编辑
@@ -480,33 +480,34 @@ defaults: &defaults
     mcq_type: 多选题
     tof_type: 判断题
     qaa_type: 问答题
-  error_logs:
+  error_logs: &58
     label: 错误日志
     name: 名称
     log_url: 路径
-  students:
+  students: &59
     label: 学生
     name: 姓名
-    nickname: 微信昵称 
+    nickname: 微信昵称
     idno: 身份证号
     phone: 电话
-  essays:
+  essays: &60
     label: 学习文章
     title: 标题
     dept: 部门
     article_date: 日期
     content: 文章内容
-  advises:
+  advises: &61
     label: 意见反馈
     title: 标题
     content: 内容
-  learn_ctgs:
+  learn_ctgs: &62
     label: 在线答题分类
     name: 名称
-  law_ctgs:
+    logo: logo
+  law_ctgs: &63
     label: 法律制度类目
     name: 名称
-  laws:
+  laws: &64
     label: 法律法规
     title: 标题
     pdt_date: 日期
@@ -514,11 +515,200 @@ defaults: &defaults
     dept: 部门
     ctg: 类别
 development:
-  <<: *mysetting
-  <<: *defaults
+  notices: *1
+  reports: *2
+  models: *3
+  properties: *4
+  relates: *5
+  templates: *6
+  natures: *7
+  spiders: *8
+  selectors: *9
+  admins: *10
+  users: *11
+  roles: *12
+  permissions: *13
+  systems: *14
+  states: *15
+  trade_orders: *16
+  extract_cashes: *17
+  file_libs: *18
+  archives: *19
+  portfolios: *20
+  examines: *21
+  exm_items: *22
+  agendas: *23
+  statistics: *24
+  companies: *25
+  factories: *26
+  departments: *27
+  charts: *28
+  months: *29
+  accounts: *30
+  wares: *31
+  productions: *32
+  waters: *33
+  water_ones: *34
+  water_twos: *35
+  water_items: *36
+  sewages: *37
+  sewage_ones: *38
+  sewage_twos: *39
+  sewage_items: *40
+  projects: *41
+  project_ones: *42
+  project_twos: *43
+  project_items: *44
+  repair_parts: *45
+  emergencies: *46
+  stuffs: *47
+  devices: *48
+  upholds: *49
+  papers: *50
+  singles: *51
+  single_options: *52
+  mcqs: *53
+  mcq_options: *54
+  tofs: *55
+  qaas: *56
+  qes_banks: *57
+  error_logs: *58
+  students: *59
+  essays: *60
+  advises: *61
+  learn_ctgs: *62
+  law_ctgs: *63
+  laws: *64
+  carousels:
+    label: 走马灯
+    title: 标题
 test:
-  <<: *mysetting
-  <<: *defaults
+  notices: *1
+  reports: *2
+  models: *3
+  properties: *4
+  relates: *5
+  templates: *6
+  natures: *7
+  spiders: *8
+  selectors: *9
+  admins: *10
+  users: *11
+  roles: *12
+  permissions: *13
+  systems: *14
+  states: *15
+  trade_orders: *16
+  extract_cashes: *17
+  file_libs: *18
+  archives: *19
+  portfolios: *20
+  examines: *21
+  exm_items: *22
+  agendas: *23
+  statistics: *24
+  companies: *25
+  factories: *26
+  departments: *27
+  charts: *28
+  months: *29
+  accounts: *30
+  wares: *31
+  productions: *32
+  waters: *33
+  water_ones: *34
+  water_twos: *35
+  water_items: *36
+  sewages: *37
+  sewage_ones: *38
+  sewage_twos: *39
+  sewage_items: *40
+  projects: *41
+  project_ones: *42
+  project_twos: *43
+  project_items: *44
+  repair_parts: *45
+  emergencies: *46
+  stuffs: *47
+  devices: *48
+  upholds: *49
+  papers: *50
+  singles: *51
+  single_options: *52
+  mcqs: *53
+  mcq_options: *54
+  tofs: *55
+  qaas: *56
+  qes_banks: *57
+  error_logs: *58
+  students: *59
+  essays: *60
+  advises: *61
+  learn_ctgs: *62
+  law_ctgs: *63
+  laws: *64
 production:
-  <<: *mysetting
-  <<: *defaults
+  notices: *1
+  reports: *2
+  models: *3
+  properties: *4
+  relates: *5
+  templates: *6
+  natures: *7
+  spiders: *8
+  selectors: *9
+  admins: *10
+  users: *11
+  roles: *12
+  permissions: *13
+  systems: *14
+  states: *15
+  trade_orders: *16
+  extract_cashes: *17
+  file_libs: *18
+  archives: *19
+  portfolios: *20
+  examines: *21
+  exm_items: *22
+  agendas: *23
+  statistics: *24
+  companies: *25
+  factories: *26
+  departments: *27
+  charts: *28
+  months: *29
+  accounts: *30
+  wares: *31
+  productions: *32
+  waters: *33
+  water_ones: *34
+  water_twos: *35
+  water_items: *36
+  sewages: *37
+  sewage_ones: *38
+  sewage_twos: *39
+  sewage_items: *40
+  projects: *41
+  project_ones: *42
+  project_twos: *43
+  project_items: *44
+  repair_parts: *45
+  emergencies: *46
+  stuffs: *47
+  devices: *48
+  upholds: *49
+  papers: *50
+  singles: *51
+  single_options: *52
+  mcqs: *53
+  mcq_options: *54
+  tofs: *55
+  qaas: *56
+  qes_banks: *57
+  error_logs: *58
+  students: *59
+  essays: *60
+  advises: *61
+  learn_ctgs: *62
+  law_ctgs: *63
+  laws: *64
