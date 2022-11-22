@@ -43,7 +43,7 @@ namespace 'db' do
           sebcLists.each do |item|
             type = item['type']
             title = convert_base64(item['title'])
-            answer = item['answer'].blank? ? '' : item['answer'].strip
+            answer = item['answer'].blank? ? '' : convert_base64(item['answer'].strip)
             analyzeContent = convert_base64(item['analyzeContent'])
 
       

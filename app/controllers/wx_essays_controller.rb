@@ -1,6 +1,6 @@
 class WxEssaysController < ApplicationController
   skip_before_action :verify_authenticity_token
-  before_filter :wxuser_exist?
+  before_filter :wxuser_exist?, :except => [:query_show]
 
 
   def query_all 
@@ -15,6 +15,8 @@ class WxEssaysController < ApplicationController
         :title => item.title,
        
         :dept => item.dept,
+
+        :image => item.photo_url,
        
         :article_date => item.article_date,
        
@@ -36,6 +38,7 @@ class WxEssaysController < ApplicationController
     obj = {
       :title => @essay.title,
       :dept => @essay.dept,
+      :image => @essay.photo_url,
       :article_date => @essay.article_date,
       :content => content 
     }
